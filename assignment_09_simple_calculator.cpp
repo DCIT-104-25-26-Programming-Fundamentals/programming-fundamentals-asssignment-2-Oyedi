@@ -66,10 +66,148 @@
 
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 using namespace std;
+
+// Function Prototypes
+double add(double a, double b);
+double subtract(double a, double b);
+double multiply(double a, double b);
+bool divide(double a, double b, double &result);
+bool modulus(int a, int b, int &result);
+double power(double base, double exp);
+void displayMenu();
+
+// Function 1: Addition
+double add(double a, double b) {
+    return a + b;
+}
+
+// Function 2: Subtraction
+double subtract(double a, double b) {
+    return a - b;
+}
+
+// Function 3: Multiplication
+double multiply(double a, double b) {
+    return a * b;
+}
+
+// Function 4: Division (Returns false if division by zero occurs)
+bool divide(double a, double b, double &result) {
+    if (b == 0) {
+        return false;
+    }
+    result = a / b;
+    return true;
+}
+
+// Function 5: Modulus (Returns false if division/modulus by zero occurs)
+bool modulus(int a, int b, int &result) {
+    if (b == 0) {
+        return false;
+    }
+    result = a % b;
+    return true;
+}
+
+// Function 6: Exponentiation using pow() from <cmath>
+double power(double base, double exp) {
+    return pow(base, exp);
+}
+
+// Function to display the calculator menu interface
+void displayMenu() {
+    cout << "\n============================\n";
+    cout << "     SIMPLE CALCULATOR\n";
+    cout << "============================\n";
+    cout << "1. Addition\n";
+    cout << "2. Subtraction\n";
+    cout << "3. Multiplication\n";
+    cout << "4. Division\n";
+    cout << "5. Modulus\n";
+    cout << "6. Exponentiation\n";
+    cout << "7. Quit\n";
+    cout << "Select an operation (1-7): ";
+}
+
+int main() {
+    int choice = 0;
+
+    while (choice != 7) {
+        displayMenu();
+        cin >> choice;
+
+        // Input validation for menu choices (e.g. non-numeric input)
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input. Please enter a number between 1 and 7.\n";
+            continue;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!\n";
+            break;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Invalid choice! Please select an operation between 1 and 7.\n";
+            continue;
+        }
+
+        // Operation execution
+        if (choice >= 1 && choice <= 4 || choice == 6) {
+            double num1, num2;
+            cout << "Enter first number : ";
+            cin >> num1;
+            cout << "Enter second number: ";
+            cin >> num2;
+
+            cout << fixed << setprecision(2);
+
+            switch (choice) {
+                case 1:
+                    cout << "Result: " << num1 << " + " << num2 << " = " << add(num1, num2) << "\n";
+                    break;
+                case 2:
+                    cout << "Result: " << num1 << " - " << num2 << " = " << subtract(num1, num2) << "\n";
+                    break;
+                case 3:
+                    cout << "Result: " << num1 << " * " << num2 << " = " << multiply(num1, num2) << "\n";
+                    break;
+                case 4: {
+                    double result;
+                    if (divide(num1, num2, result)) {
+                        cout << "Result: " << num1 << " / " << num2 << " = " << result << "\n";
+                    } else {
+                        cout << "Error: Cannot divide by zero.\n";
+                    }
+                    break;
+                }
+                case 6:
+                    cout << "Result: " << num1 << " ^ " << num2 << " = " << power(num1, num2) << "\n";
+                    break;
+            }
+        } else if (choice == 5) {
+            // Modulus operation uses integer types
+            int num1, num2, result;
+            cout << "Enter first integer : ";
+            cin >> num1;
+            cout << "Enter second integer: ";
+            cin >> num2;
+
+            if (modulus(num1, num2, result)) {
+                cout << "Result: " << num1 << " % " << num2 << " = " << result << "\n";
+            } else {
+                cout << "Error: Cannot divide/modulus by zero.\n";
+            }
+        }
+    }
+
+    return 0;
+}
+// =============================================================================
 
