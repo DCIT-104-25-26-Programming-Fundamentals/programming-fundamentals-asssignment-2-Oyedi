@@ -52,8 +52,63 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
-
 #include <iostream>
 using namespace std;
+
+// Function Prototypes
+void printTable(int num);
+void printTablesUpToN(int n);
+
+// Function to print a single multiplication table from 1 to 12
+void printTable(int num) {
+    cout << "Multiplication Table for " << num << ":\n";
+    for (int i = 1; i <= 12; i++) {
+        cout << num << "  x  " << i << "  =  " << num * i << "\n";
+    }
+}
+
+// Function to print multiplication tables for every number from 1 to N
+void printTablesUpToN(int n) {
+    for (int i = 1; i <= n; i++) {
+        printTable(i);
+        if (i < n) {
+            cout << "---------------------------\n";
+        }
+    }
+}
+
+int main() {
+    int num, n;
+
+    // --- PART A: Single Table ---
+    cout << "=== PART A: Single Table ===\n";
+    cout << "Enter a number: ";
+    cin >> num;
+
+    if (num <= 0) {
+        cout << "Error: Please enter a positive integer.\n";
+        return 1;
+    }
+
+    cout << "\n";
+    printTable(num);
+
+    cout << "\n===============================\n\n";
+
+    // --- PART B: Tables from 1 to N ---
+    cout << "=== PART B: Tables from 1 to N ===\n";
+    cout << "Enter a number N: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Error: Please enter a positive integer.\n";
+        return 1;
+    }
+
+    cout << "\n";
+    printTablesUpToN(n);
+
+    return 0;
+}
+// =============================================================================
 
